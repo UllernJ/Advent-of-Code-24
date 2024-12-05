@@ -6,11 +6,11 @@ private val input = readInput("day2")
     .map { it.split(" ").map(String::toInt) }
 
 
-fun part1(): Int {
+private fun part1(): Int {
     return input.count { isSafe(it) }
 }
 
-fun part2(): Int {
+private fun part2(): Int {
     return input.count { safeDampener(it) }
 }
 
