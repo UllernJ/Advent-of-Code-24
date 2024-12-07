@@ -11,21 +11,10 @@ private fun part1(): Int {
 
 private fun calculateQueue(): Int {
     populateRuleset()
-    val validList = puzzle.filter { isValid(it) }
+    val validList = puzzle.filter { containsIllegalNumber(it) }
     return validList.sumOf {
-        it[it.size/2]
+        it[it.size / 2]
     }
-}
-
-private fun isValid(queue: List<Int>): Boolean {
-    val ruleset = extractRules(queue)
-    return ruleset != null
-            && ruleset.containsAll(queue.drop(1))
-            && containsIllegalNumber(queue)
-}
-
-private fun extractRules(list: List<Int>): MutableList<Int>? {
-    return map[list[0]]
 }
 
 private fun containsIllegalNumber(list: List<Int>): Boolean {
