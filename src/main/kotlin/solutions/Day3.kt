@@ -8,6 +8,7 @@ private val REGEX_P2 = "mul\\(\\d+,\\d+\\)|do\\(\\)|don't\\(\\)".toRegex()
 private val NUMBER_REGEX = "\\d+,\\d+".toRegex()
 private const val DO = "do()"
 private const val DONT = "don't()"
+
 private fun part1(): Int {
     val matches = getMatches(REGEX_P1)
     val valuesList = matches.flatMap { match ->
@@ -43,12 +44,12 @@ private fun filterInstructions(vals: List<String>): List<List<Int>> {
     var doAsTold = true
     val values = mutableListOf<List<Int>>()
     vals.forEach {
-        if(it == DO) {
+        if (it == DO) {
             doAsTold = true
-        } else if(it == DONT) {
+        } else if (it == DONT) {
             doAsTold = false
         } else {
-            if(doAsTold) {
+            if (doAsTold) {
                 values.add(extractNumbers(it))
             }
         }
