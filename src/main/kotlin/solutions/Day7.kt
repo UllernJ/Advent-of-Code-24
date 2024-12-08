@@ -2,15 +2,22 @@ package solutions
 
 import utils.readInput
 import kotlin.math.pow
+import kotlin.system.measureTimeMillis
+import kotlin.time.Duration.Companion.milliseconds
 
 private val input = readInput("day7").flatMap { it.split(",") }
 
 private fun part1(): Long {
-    return input.sumOf { isValid(it) }
+    val listOfOperators = listOf("*", "+")
+    return input.sumOf { isValid(it, listOfOperators) }
 }
 
-private fun isValid(list: String): Long {
-    val listOfOperators = listOf("*", "+")
+private fun part2(): Long {
+    val listOfOperators = listOf("*", "+", "|")
+    return input.sumOf { isValid(it, listOfOperators) }
+}
+
+private fun isValid(list: String, listOfOperators: List<String>): Long {
     val values = list.split(":", " ")
         .filter { it.isNotEmpty() }
         .map(String::toLong)
@@ -27,7 +34,11 @@ private fun isValid(list: String): Long {
             val operator = listOfOperators[currentCombination % listOfOperators.size]
             if (operator == "+") {
                 sum += vals[i]
-            } else {
+            } else if(operator == "|") {
+                val newVal = sum.toString() + vals[i]
+                sum = newVal.toLong()
+            }
+                else {
                 sum *= vals[i]
             }
             currentCombination /= listOfOperators.size
@@ -41,4 +52,8 @@ private fun isValid(list: String): Long {
 
 fun main() {
     println(part1())
+    val time = measureTimeMillis {
+        println(part2())
+    }
+    println("Time taken to run part2: " + time.milliseconds.inWholeSeconds +" seconds!")
 }
