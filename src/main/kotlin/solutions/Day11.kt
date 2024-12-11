@@ -5,7 +5,7 @@ import utils.readInput
 private val input = readInput("day11").flatMap {it.split(" ")}.map(String::toLong)
 
 private fun part1() {
-    val list = manipulateSpaceTime(input, 75)
+    val list = manipulateSpaceTime(input, 25)
     println("Number of stones: ${list.size}")
 }
 
@@ -30,10 +30,6 @@ private fun manipulateSpaceTime(input: List<Long>, iterations: Int): List<Long> 
     }
     return manipulateSpaceTime(newList, iterations - 1)
 }
-private fun String.trimTrailingZeros(): String {
-    return this.trimEnd('0').ifEmpty { "0" }
-}
-
 
 
 fun main() {
